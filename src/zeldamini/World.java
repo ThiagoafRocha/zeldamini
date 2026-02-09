@@ -24,7 +24,7 @@ public class World {
 		}
 		
 		for(int yy = 0; yy < QUANTIDADE_DE_BLOCOS_VERTICAL; yy++) {
-			blocks.add(new Block(480-32,yy*32));
+			blocks.add(new Block(640-32,yy*32));
 		}
 	}
 	
