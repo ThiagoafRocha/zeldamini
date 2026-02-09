@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class World {
-	private static int QUANTIDADE_DE_BLOCOS_HORIZONTAL = 15;
+	private static int QUANTIDADE_DE_BLOCOS_HORIZONTAL = 20;
 	private static int QUANTIDADE_DE_BLOCOS_VERTICAL = 15;
 	public static List<Block> blocks = new ArrayList<Block>();
 

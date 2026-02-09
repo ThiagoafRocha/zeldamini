@@ -3,6 +3,8 @@ package zeldamini;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Player extends Rectangle{
 	
@@ -12,6 +14,12 @@ public class Player extends Rectangle{
 	public int curAnimation = 0;
 	
 	public int curFrames = 0, targetFrames = 15;
+	
+	public static List<Bullet> bullets = new ArrayList<Bullet>();
+	
+	public boolean shoot = false;
+	
+	public int dir = 1;
 	
 	public Player(int x, int y) {
 		super(x,y,32,32);
@@ -23,9 +31,11 @@ public class Player extends Rectangle{
 		if(right && World.isFree(x+spd, y)) {
 			x+=spd;
 			moved = true;
+			dir = 1;
 		} else if(left && World.isFree(x-spd, y)) {
 			x-=spd;
 			moved = true;
+			dir = -1;
 		}
 		
 		if(up && World.isFree(x, y-spd)) {
@@ -46,9 +56,22 @@ public class Player extends Rectangle{
 				}
 			}
 		}
+		
+		if(shoot) {
+			shoot=false;
+			bullets.add(new Bullet(x,y,dir));
+		}
+		
+		for(int i = 0; i < bullets.size(); i++) {
+			bullets.get(i).tick();
+		}
 	}
 	
 	public void render(Graphics g) {
 		g.drawImage(Spritesheet.player_front[curAnimation], x, y, 32, 32, null);
+		
+		for(int i = 0; i < bullets.size(); i++) {
+			bullets.get(i).render(g);
+		}
 	}
 }
